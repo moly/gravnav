@@ -15,6 +15,8 @@ public class MenuState extends FlxState
 	{
 		FlxG.setBgColor(0xFF2F567C);
 		
+		FlxG.playMusic("WhenMyStomachTurns.mp3");
+		
 		int repeatsNeeded = FlxU.ceil(FlxG.width / 240f) + 1;
 		
 		FlxObject stars = new RepeatingBackground("Stars1.png", repeatsNeeded);
