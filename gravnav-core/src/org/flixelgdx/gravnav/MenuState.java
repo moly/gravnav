@@ -49,22 +49,23 @@ public class MenuState extends FlxState
 		if(_currentScreen == _titleScreen)
 		{
 			if(FlxG.keys.justPressed("I"))
-			{
-				replace(_currentScreen, _instructionsScreen);
-				_currentScreen = _instructionsScreen;
-			}
+				changeScreen(_instructionsScreen);
 			else if(FlxG.keys.justPressed("C"))
-			{
-				replace(_currentScreen, _creditScreen);
-				_currentScreen = _creditScreen;
-			}
+				changeScreen(_creditScreen);
 			else if(FlxG.keys.justPressed("M"))
 				 FlxU.openURL("http://adnissen.com/");
 		}
 		else if(FlxG.keys.justPressed("ESCAPE"))
 		{
-			replace(_currentScreen, _titleScreen);
-			_currentScreen = _titleScreen;
+			changeScreen(_titleScreen);
 		}
+	}
+	
+	protected void changeScreen(FlxState newScreen)
+	{
+		replace(_currentScreen, newScreen);
+		_currentScreen = newScreen;
+		
+		FlxG.play("MenuChange.mp3");
 	}
 }
