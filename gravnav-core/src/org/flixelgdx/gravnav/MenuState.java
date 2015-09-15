@@ -53,7 +53,9 @@ public class MenuState extends FlxState
 			else if(FlxG.keys.justPressed("C"))
 				changeScreen(_creditScreen);
 			else if(FlxG.keys.justPressed("M"))
-				 FlxU.openURL("http://adnissen.com/");
+				FlxU.openURL("http://adnissen.com/");
+			else if(FlxG.keys.Z && FlxG.keys.X)
+				FlxG.switchState(new PlayState());
 		}
 		else if(FlxG.keys.justPressed("ESCAPE"))
 		{

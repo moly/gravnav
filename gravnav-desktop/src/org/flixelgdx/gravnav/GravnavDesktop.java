@@ -6,6 +6,6 @@ public class GravnavDesktop
 {
 	public static void main(String[] args)
 	{
-		new FlxDesktopApplication(new Gravnav(), 640, 320);
+		new FlxDesktopApplication(new Gravnav(), 854, 480);
 	}
 }
