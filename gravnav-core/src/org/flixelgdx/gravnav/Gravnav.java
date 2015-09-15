@@ -2,6 +2,7 @@ package org.flixelgdx.gravnav;
 
 import org.flixel.FlxCamera;
 import org.flixel.FlxGame;
+import org.flixelgdx.gravnav.menu.MenuState;
 
 public class Gravnav extends FlxGame
 {

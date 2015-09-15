@@ -1,4 +1,4 @@
-package org.flixelgdx.gravnav;
+package org.flixelgdx.gravnav.menu;
 
 import org.flixel.*;
 

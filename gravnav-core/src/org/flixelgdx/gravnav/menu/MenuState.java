@@ -1,6 +1,8 @@
-package org.flixelgdx.gravnav;
+package org.flixelgdx.gravnav.menu;
 
 import org.flixel.*;
+import org.flixelgdx.gravnav.PlayState;
+import org.flixelgdx.gravnav.RepeatingBackground;
 
 public class MenuState extends FlxState
 {
