@@ -17,9 +17,13 @@ public class PlayState extends FlxState
 		add(stars);
 		
 		Player player = new Player(50, 100);
+		GhostTrail trail = new GhostTrail(player, 133, 15);
+		
+		add(trail);
 		add(player);
 		
 		FlxG.camera.follow(player);
-		FlxG.camera.deadzone = new FlxRect(50, 0, player.width, FlxG.height);
+		FlxG.camera.setBounds(0, 0, Float.MAX_VALUE, FlxG.height);
+		FlxG.camera.deadzone = new FlxRect(player.x, 0, player.width, FlxG.height);
 	}
 }
