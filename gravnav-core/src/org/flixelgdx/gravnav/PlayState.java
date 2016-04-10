@@ -3,7 +3,9 @@ package org.flixelgdx.gravnav;
 import org.flixel.*;
 
 public class PlayState extends FlxState
-{
+{	
+	private FlxText _scoreText;
+	
 	@Override
 	public void create()
 	{
@@ -16,14 +18,27 @@ public class PlayState extends FlxState
 		stars.scrollFactor.x = 0.5f;
 		add(stars);
 		
-		Player player = new Player(50, 100);
-		GhostTrail trail = new GhostTrail(player, 133, 15);
+		FlxSprite player = new Player(50, 100);
+		GhostTrail trail = new GhostTrail(player, 133, 10);
 		
 		add(trail);
 		add(player);
 		
+		_scoreText = new FlxText(0, 30, FlxG.width);
+		_scoreText.setFormat("", 24, 0xFFFFFF, "center");
+		_scoreText.scrollFactor.x = 0;
+		add(_scoreText);
+		
 		FlxG.camera.follow(player);
 		FlxG.camera.setBounds(0, 0, Float.MAX_VALUE, FlxG.height);
 		FlxG.camera.deadzone = new FlxRect(player.x, 0, player.width, FlxG.height);
+	}
+	
+	@Override
+	public void update()
+	{
+		super.update();
+		
+		_scoreText.setText(String.valueOf((int)FlxG.camera.scroll.x));
 	}
 }
