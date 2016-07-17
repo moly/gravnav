@@ -22,10 +22,11 @@ public class MenuState extends FlxState
 		int repeatsNeeded = FlxU.ceil(FlxG.width / 240f) + 1;
 		
 		FlxObject stars = new RepeatingBackground("Stars1.png", repeatsNeeded);
+		stars.scrollFactor.x = 0.66f;
 		add(stars);
 		
 		stars = new RepeatingBackground("Stars2.png", repeatsNeeded);
-		stars.scrollFactor.x = 0.5f;
+		stars.scrollFactor.x = 0.33f;
 		add(stars);
 		
 		_titleScreen = new TitleScreen();
@@ -46,7 +47,7 @@ public class MenuState extends FlxState
 	{
 		super.update();
 		
-		FlxG.camera.scroll.x += FlxG.elapsed * 30;
+		FlxG.camera.scroll.x += FlxG.elapsed * 50;
 		
 		if(_currentScreen == _titleScreen)
 		{

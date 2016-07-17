@@ -3,8 +3,9 @@ package org.flixelgdx.gravnav;
 import org.flixel.*;
 
 public class PlayState extends FlxState
-{	
+{
 	private FlxText _scoreText;
+	private Blocks _blocks;
 	
 	@Override
 	public void create()
@@ -12,10 +13,11 @@ public class PlayState extends FlxState
 		int repeatsNeeded = FlxU.ceil(FlxG.width / 240f) + 1;
 		
 		FlxObject stars = new RepeatingBackground("Stars1.png", repeatsNeeded);
+		stars.scrollFactor.x = 0.66f;
 		add(stars);
 		
 		stars = new RepeatingBackground("Stars2.png", repeatsNeeded);
-		stars.scrollFactor.x = 0.5f;
+		stars.scrollFactor.x = 0.33f;
 		add(stars);
 		
 		FlxSprite player = new Player(50, 100);
@@ -23,6 +25,9 @@ public class PlayState extends FlxState
 		
 		add(trail);
 		add(player);
+		
+		_blocks = new Blocks("Block.png", 6, 183);//3667);
+		add(_blocks);
 		
 		_scoreText = new FlxText(0, 30, FlxG.width);
 		_scoreText.setFormat("", 24, 0xFFFFFF, "center");
