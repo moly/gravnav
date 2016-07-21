@@ -7,6 +7,9 @@ public class PlayState extends FlxState
 	private FlxText _scoreText;
 	private Blocks _blocks;
 	
+	private int _flipInterval = 450;
+	private int _flipCounter;
+	
 	@Override
 	public void create()
 	{
@@ -26,7 +29,7 @@ public class PlayState extends FlxState
 		add(trail);
 		add(player);
 		
-		_blocks = new Blocks("Block.png", 6, 183);//3667);
+		_blocks = new Blocks("Block.png", 6, 183);
 		add(_blocks);
 		
 		_scoreText = new FlxText(0, 30, FlxG.width);
@@ -45,5 +48,11 @@ public class PlayState extends FlxState
 		super.update();
 		
 		_scoreText.setText(String.valueOf((int)FlxG.camera.scroll.x));
+		
+		if(FlxG.camera.scroll.x > _flipInterval * (_flipCounter + 1))
+		{
+			FlxG.camera.setAngle(FlxG.camera.getAngle() + 180);
+			_flipCounter++;
+		}
 	}
 }
