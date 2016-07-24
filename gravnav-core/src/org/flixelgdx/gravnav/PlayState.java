@@ -6,6 +6,7 @@ public class PlayState extends FlxState
 {
 	private FlxText _scoreText;
 	private Blocks _blocks;
+	private FlipArrow _flipArrow;
 	
 	private int _flipInterval = 450;
 	private int _flipCounter;
@@ -32,6 +33,10 @@ public class PlayState extends FlxState
 		_blocks = new Blocks("Block.png", 6, 183);
 		add(_blocks);
 		
+		_flipArrow = new FlipArrow((FlxG.width - 165) / 2, (FlxG.height - 193) / 2);
+		_flipArrow.visible = false;
+		add(_flipArrow);
+		
 		_scoreText = new FlxText(0, 30, FlxG.width);
 		_scoreText.setFormat("", 24, 0xFFFFFF, "center");
 		_scoreText.scrollFactor.x = 0;
@@ -47,12 +52,18 @@ public class PlayState extends FlxState
 	{
 		super.update();
 		
-		_scoreText.setText(String.valueOf((int)FlxG.camera.scroll.x));
+		int nextFlipDistance = _flipInterval * (_flipCounter + 1);
 		
-		if(FlxG.camera.scroll.x > _flipInterval * (_flipCounter + 1))
+		if(FlxG.camera.scroll.x > nextFlipDistance - 180)
+			_flipArrow.visible = true;
+		
+		if(FlxG.camera.scroll.x > nextFlipDistance)
 		{
 			FlxG.camera.setAngle(FlxG.camera.getAngle() + 180);
+			_flipArrow.visible = false;
 			_flipCounter++;
 		}
+		
+		_scoreText.setText(String.valueOf((int)FlxG.camera.scroll.x));
 	}
 }
