@@ -48,11 +48,19 @@ public class Blocks extends FlxBasic
 			
 			_waveCounter++;
 		}
+		
+
+		_blocks.update();
 	}
 	
 	@Override
 	public void draw()
 	{
 		_blocks.draw();
+	}
+
+	public FlxGroup getBlocks()
+	{
+		return _blocks;
 	}
 }

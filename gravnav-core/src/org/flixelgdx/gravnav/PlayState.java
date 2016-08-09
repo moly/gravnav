@@ -4,6 +4,7 @@ import org.flixel.*;
 
 public class PlayState extends FlxState
 {
+	private Player _player;
 	private FlxText _scoreText;
 	private Blocks _blocks;
 	private FlipArrow _flipArrow;
@@ -24,11 +25,13 @@ public class PlayState extends FlxState
 		stars.scrollFactor.x = 0.33f;
 		add(stars);
 		
-		FlxSprite player = new Player(50, 100);
-		GhostTrail trail = new GhostTrail(player, 133, 10);
+		_player = new Player(50, 100);
+		_player.play("down");
+		
+		GhostTrail trail = new GhostTrail(_player, 133, 10);
 		
 		add(trail);
-		add(player);
+		add(_player);
 		
 		_blocks = new Blocks("Block.png", 6, 183);
 		add(_blocks);
@@ -42,9 +45,9 @@ public class PlayState extends FlxState
 		_scoreText.scrollFactor.x = 0;
 		add(_scoreText);
 		
-		FlxG.camera.follow(player);
+		FlxG.camera.follow(_player);
 		FlxG.camera.setBounds(0, 0, Float.MAX_VALUE, FlxG.height);
-		FlxG.camera.deadzone = new FlxRect(player.x, 0, player.width, FlxG.height);
+		FlxG.camera.deadzone = new FlxRect(_player.x, 0, _player.width, FlxG.height);
 	}
 	
 	@Override
@@ -62,6 +65,15 @@ public class PlayState extends FlxState
 			FlxG.camera.setAngle(FlxG.camera.getAngle() + 180);
 			_flipArrow.visible = false;
 			_flipCounter++;
+		}
+		
+		// only check collisions within the current visible screen area
+		FlxG.worldBounds.make(FlxG.camera.scroll.x, FlxG.camera.scroll.y, FlxG.camera.width, FlxG.camera.height);
+		
+		if(_player.y < -20 || _player.y > FlxG.height + 4 || FlxG.overlap(_player, _blocks.getBlocks()))
+		{
+			FlxG.flash(0x8DA2C5, 1);
+			_player.kill();
 		}
 		
 		_scoreText.setText(String.valueOf((int)FlxG.camera.scroll.x));
