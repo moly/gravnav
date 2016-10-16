@@ -57,23 +57,30 @@ public class PlayState extends FlxState
 		
 		int nextFlipDistance = _flipInterval * (_flipCounter + 1);
 		
-		if(FlxG.camera.scroll.x > nextFlipDistance - 180)
+		if(_player.x > nextFlipDistance - 180)
 			_flipArrow.visible = true;
 		
-		if(FlxG.camera.scroll.x > nextFlipDistance)
+		if(_player.x > nextFlipDistance)
 		{
 			FlxG.camera.setAngle(FlxG.camera.getAngle() + 180);
 			_flipArrow.visible = false;
 			_flipCounter++;
 		}
 		
-		// only check collisions within the current visible screen area
-		FlxG.worldBounds.make(FlxG.camera.scroll.x, FlxG.camera.scroll.y, FlxG.camera.width, FlxG.camera.height);
-		
-		if(_player.y < -20 || _player.y > FlxG.height + 4 || FlxG.overlap(_player, _blocks.getBlocks()))
+		if(_player.alive)
 		{
-			FlxG.flash(0x8DA2C5, 1);
-			_player.kill();
+			// only check collisions within the current visible screen area
+			FlxG.worldBounds.make(FlxG.camera.scroll.x, FlxG.camera.scroll.y, FlxG.camera.width, FlxG.camera.height);
+			
+			if(_player.y < -_player.height || _player.y > FlxG.height || FlxG.overlap(_player, _blocks.getBlocks()))
+			{
+				FlxG.flash(0x8DA2C5, 1);
+				_player.kill();
+				
+				DeathParticles particles = new DeathParticles(_player.x, _player.y, 400);
+				particles.start(true, 0, 0, 0);
+				add(particles);
+			}
 		}
 		
 		_scoreText.setText(String.valueOf((int)FlxG.camera.scroll.x));

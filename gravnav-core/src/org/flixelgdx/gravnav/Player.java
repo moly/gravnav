@@ -13,6 +13,8 @@ public class Player extends FlxSprite
 		addAnimation("up", new int[]{0, 1}, 4);
 		addAnimation("down", new int[]{2, 3}, 4);
 		
+		height = 9;
+		offset.y = 3;
 		maxVelocity.y = 350;
 	}
 	

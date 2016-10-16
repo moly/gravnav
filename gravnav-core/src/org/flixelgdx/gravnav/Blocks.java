@@ -30,7 +30,9 @@ public class Blocks extends FlxBasic
 	public void update()
 	{		
 		if(FlxG.camera.scroll.x > _interval * _waveCounter)
-		{	
+		{
+			// randomly pick gaps in the blocks. starts with 3 gaps,
+			// then decreases by one every five waves.
 			boolean[] gaps = new boolean[_blocksPerWave];
 			int numberOfGaps = (int) FlxU.max(3 - (_waveCounter / 5), 1);
 			for(int i = 0; i < numberOfGaps; i++)
@@ -38,18 +40,15 @@ public class Blocks extends FlxBasic
 			
 			for(int i = 0; i < _blocksPerWave; i++)
 			{
-				if(!gaps[i])
-				{
-					FlxSprite block = (FlxSprite) _blocks.recycle();
-					block.x = FlxG.camera.scroll.x + FlxG.width + 50;
-					block.y = i * block.height;
-				}
+				FlxSprite block = (FlxSprite) _blocks.recycle();
+				block.x = FlxG.camera.scroll.x + FlxG.width + 50;
+				block.y = i * block.height;
+				block.visible = !gaps[i];
 			}
 			
 			_waveCounter++;
 		}
 		
-
 		_blocks.update();
 	}
 	
