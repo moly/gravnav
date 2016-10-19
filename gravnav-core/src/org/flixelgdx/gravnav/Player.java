@@ -3,7 +3,9 @@ package org.flixelgdx.gravnav;
 import org.flixel.*;
 
 public class Player extends FlxSprite
-{	
+{
+	private final GhostTrail _trail;
+	
 	public Player(int x, int y)
 	{
 		super(x, y);		
@@ -16,6 +18,8 @@ public class Player extends FlxSprite
 		height = 9;
 		offset.y = 3;
 		maxVelocity.y = 350;
+		
+		_trail = new GhostTrail(this, 133, 10);
 	}
 	
 	@Override
@@ -38,6 +42,16 @@ public class Player extends FlxSprite
 				acceleration.y = 300;
 				play("down");
 			}
+			
+			_trail.update();
 		}
+	}
+	
+	@Override
+	public void draw()
+	{
+		_trail.draw();
+		
+		super.draw();
 	}
 }

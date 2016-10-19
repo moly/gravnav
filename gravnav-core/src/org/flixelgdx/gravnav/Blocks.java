@@ -43,7 +43,7 @@ public class Blocks extends FlxBasic
 				FlxSprite block = (FlxSprite) _blocks.recycle();
 				block.x = FlxG.camera.scroll.x + FlxG.width + 50;
 				block.y = i * block.height;
-				block.visible = !gaps[i];
+				block.exists = !gaps[i];
 			}
 			
 			_waveCounter++;

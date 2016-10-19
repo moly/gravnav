@@ -27,10 +27,6 @@ public class PlayState extends FlxState
 		
 		_player = new Player(50, 100);
 		_player.play("down");
-		
-		GhostTrail trail = new GhostTrail(_player, 133, 10);
-		
-		add(trail);
 		add(_player);
 		
 		_blocks = new Blocks("Block.png", 6, 183);
@@ -81,6 +77,10 @@ public class PlayState extends FlxState
 				particles.start(true, 0, 0, 0);
 				add(particles);
 			}
+		}
+		else if(FlxG.keys.justPressed("X"))
+		{
+			FlxG.switchState(new PlayState());
 		}
 		
 		_scoreText.setText(String.valueOf((int)FlxG.camera.scroll.x));
